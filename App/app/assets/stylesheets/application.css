@@ -1,0 +1,408 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+/* @import url("https://fonts.googleapis.com/css?family=Major+Mono+Display"); */
+::-webkit-scrollbar { /* #feature, .form-body, #task-container, #feature-tag-container, .folder-body */
+  width: 6px;
+}
+#task-container::-webkit-scrollbar {
+  width: 10px;
+}
+#feature-tag-container::-webkit-scrollbar-thumb, .folder-body::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: #BBBBBB;
+}
+.folder-body::-webkit-scrollbar-thumb {
+  background: #555555;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #AAAAAA;
+}
+.folder-body::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+body {
+  margin: 0;
+}
+#page {
+  height: 100vh;
+}
+@keyframes bright {
+  100% {visibility: hidden;}
+}
+#dark-1, #dark-2 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000000;
+  visibility: visible;
+  transition: opacity 0.6s;
+}
+#dark-1.bright, #dark-2.bright {
+  opacity: 0;
+  animation: bright 0.6s forwards;
+}
+#dark-1.dim, #dark-2.dim {
+  opacity: 0.6;
+}
+#content {
+  height: 100%; /* modify */
+  display: flex;
+}
+#feature { /* height? ;are the others height: 0 necessary?*/
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex-grow: 0;
+  transition: width 0.5s;
+}
+#feature-expand {
+  border-radius: 0 12px 12px 0;
+  width: 16px;
+  height: 54px;
+  padding: 4px;
+  position: absolute;
+  top: 40px;
+  cursor: pointer;
+  background: #FFFFFF;
+  font-size: 36px;
+  color: #000000;
+  transition: background 0.4s, color 0.4s;
+}
+#feature-expand:hover {
+  background: #000000;
+  color: #FFFFFF;
+}
+.feature-label {
+  border: 1px solid #6600BB;
+  padding: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: Quicksand;
+  font-size: 20px;
+  font-weight: 700;
+  color: #6600BB;
+  transition: background 0.5s, color 0.5s;
+}
+.feature-label:hover {
+  background: #6600BB;
+  color: white;
+}
+#sign {
+  overflow-y: hidden;
+  transition: height 0.5s;
+}
+#search {
+  overflow-y: hidden;
+  transition: height 0.5s;
+}
+#feature-tag-container {
+  border-radius: 10px;
+  width: 300px;
+  padding: 6px 8px 6px 4px;
+  height: 200px;
+  overflow-y: overlay;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  background: #E8E8E8;
+}
+.feature-tag {
+  margin: 3px;
+  border: 2px solid var(--dark);
+  border-radius: 12px;
+  min-width: 60px;
+  max-width: 140px;
+  height: 24px;
+  position: relative;
+  overflow-x: hidden;
+  cursor: pointer;
+  user-select: none;
+  flex-grow: 1;
+  font-family: Quicksand;
+  transition: filter 0.4s, background 0.3s, color 0.3s;
+}
+.feature-tag:hover {
+  filter: brightness(0.9);
+}
+.feature-tag-text {
+  width: calc(100% - 25px);
+  padding: 1px 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.tag-delete {
+  border: none;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--dark);
+  transition: filter 0.4s, background 0.3s, color 0.3s;
+}
+.tag-delete:hover {
+  filter: brightness(0.8);
+}
+#container {
+  height: 100%; /* modify */
+  position: relative;
+  background: #E8E8E8;
+  flex-grow: 1;
+}
+#task-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow-y: auto;
+  /* top: 0; */
+}
+#add-container {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#add {
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  background: #6600BB;
+  font-size: 30px;
+  color: #FFFFFF;
+  transition: background 0.3s, transform 0.2s;
+}
+#add:hover {
+  background: #AA00FF;
+  transform: scale(1.1);
+}
+@keyframes pending-enter {
+  0% {height: 0;}
+}
+.pending {
+  border-radius: 12px 12px 0 0;
+  height: 36px;
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+  cursor: pointer;
+  animation: pending-enter 0.4s 0.5s backwards;
+  transition: width 0.5s, left 0.5s, filter 0.4s;
+}
+.pending:hover {
+  filter: brightness(); /* brightness, or saturate */
+}
+.pending-text {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: Quicksand;
+  text-shadow: 3px 2px 4px #000000AA;
+}
+.pending-cancel {
+  border: none;
+  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #DDDDDDAA;
+  transition: background 0.3s;
+}
+.pending-cancel:hover {
+  background: #DDDDDD;
+}
+@keyframes enter {
+  0% {top: calc(var(--top) + 50px); opacity: 0;}
+  100% {top: var(--top);}
+}
+.form {
+  --top: 75px;
+  border-radius: 20px;
+  width: 800px;
+  height: calc(100vh - 150px);
+  position: absolute;
+  left: calc(50% - 400px);
+  overflow: hidden; /* form-label & dark-2 */
+  background: #FFFFFF;
+  animation: enter 0.5s forwards;
+}
+.form-header {
+  border-radius: 20px 20px 0 0;
+  height: 75px;
+}
+.form-label {
+  border: none;
+  width: 450px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  outline: none;
+  font-family: Raleway;
+  font-size: 25px;
+}
+.form-color {
+  position: absolute;
+  top: 25px;
+}
+.form-cancel {
+  border: none;
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #DDDDDDAA;
+  transition: background 0.3s;
+}
+.form-cancel:hover {
+  background: #DDDDDD;
+}
+.form-confirm { /* HEAVY EDIT */
+  --top: 200px;
+  border-radius: 15px;
+  width: 300px;
+  height: 75px;
+  position: absolute;
+  left: 250px;
+  background: #E8E8E8;
+  box-shadow: 0 0 8px 1px #888888;
+  animation: enter 0.6s forwards;
+}
+.form-body {
+  border-radius: 0 0 20px 20px;
+  height: calc(100% - 75px);
+  overflow-y: auto;
+}
+.form-description { /* position: absolute? */
+  border-radius: 10px;
+  margin: 20px;
+  min-width: calc(100% - 60px);
+  max-width: calc(100% - 60px);
+  min-height: 70px;
+  padding: 8px;
+  font-family: Quicksand;
+  font-size: 18px;
+}
+.tag {
+  --top: 75px;
+  border-radius: 20px;
+  width: 800px;
+  height: calc(100vh - 150px);
+  position: absolute;
+  left: calc(50% - 400px);
+  overflow: hidden;
+  background: #FFFFFF;
+  animation: enter 0.5s forwards;
+}
+.block {
+  border-radius: 15px;
+  width: 200px;
+  height: var(--height);
+  position: absolute;
+  overflow: hidden;
+  cursor: pointer;
+  background: #FFFFFF;
+  animation: enter 0.6s;
+  transition: height 0.5s, top 0.5s, left 0.5s, box-shadow 0.3s; /* modify */
+}
+.block:hover {
+  box-shadow: 0 0 12px 1px #888888;
+}
+.block-header {
+  height: 24px;
+  padding: 8px 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: Quicksand;
+  font-size: 18px;
+  text-shadow: 3px 2px 4px #000000AA; /* modify */
+  box-shadow: 0 2px 12px #00000066;
+}
+.block-body {
+  font-family: Quicksand; /* modify; set height? */
+}
+@keyframes expand {
+  0% {transform: scale(0.4);}
+}
+.folder {
+  border-radius: 15px;
+  width: 200px;
+  height: var(--height);
+  position: absolute;
+  overflow: hidden;
+  cursor: pointer;
+  background: #000000;
+  animation: expand 0.5s;
+  transition: height 0.5s, top 0.5s, left 0.5s;
+}
+.folder:hover {
+  height: 440px;
+}
+.folder-front {
+  height: 200px;
+  background: radial-gradient(#444444, #000000);
+}
+.folder-body {
+  width: 195px;
+  height: 230px;
+  overflow-y: auto;
+}
+.folder-task { /* copy block */
+  border-radius: 10px;
+  margin: 10px 12px;
+  width: 172px;
+  height: var(--height);
+  overflow: hidden;
+  cursor: pointer;
+  background: #FFFFFF;
+  transition: height 0.5s; /* expand too fast on hover, annoying */
+}
+.folder-task:hover {
+  height: 180px;
+}
+.folder-task-header { /* copy block-header */
+  height: 24px;
+  padding: 8px 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: Quicksand;
+  font-size: 18px;
+  text-shadow: 3px 2px 4px #000000AA; /* modify */
+  box-shadow: 0 2px 12px #00000066;
+}
+.folder-task-body { /* copy block-body */
+  
+}
